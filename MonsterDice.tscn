@@ -1,41 +1,53 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Dice/dice_monster_1.png" type="Texture" id=1]
-[ext_resource path="res://Dice/dice_monster_3.png" type="Texture" id=2]
-[ext_resource path="res://Dice/dice_monster_2.png" type="Texture" id=3]
-[ext_resource path="res://Dice/dice_monster_6.png" type="Texture" id=4]
-[ext_resource path="res://Dice/dice_monster_5.png" type="Texture" id=5]
-[ext_resource path="res://Dice/dice_monster_4.png" type="Texture" id=6]
 [ext_resource path="res://MonsterDice.gd" type="Script" id=7]
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/dice_monster_2.png-df23dcf67aa0c206f2818e5c92b386af.stex"
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/dice_monster_5.png-7edcbd59cbb801378831403c5b7bf0e4.stex"
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/dice_monster_4.png-b41bd9fa4f4761da593ef44de0164475.stex"
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/dice_monster_3.png-11924052eb836ff534af5408118ce2b1.stex"
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/dice_monster_1.png-2ae3325290d8d2755038bb855f431270.stex"
+
+[sub_resource type="StreamTexture" id=7]
+load_path = "res://.import/dice_monster_6.png-163dbdf31423f28062568ca02f2bb61d.stex"
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
 "name": "3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "1",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "6",
 "speed": 5.0

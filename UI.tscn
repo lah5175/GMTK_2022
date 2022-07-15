@@ -2,9 +2,11 @@
 
 [ext_resource path="res://MonsterDice.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PlayerDice.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Dice/dicebox.png" type="Texture" id=3]
 [ext_resource path="res://Sounds/558119__abdrtar__dice.mp3" type="AudioStream" id=4]
 [ext_resource path="res://UI.gd" type="Script" id=5]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/dicebox.png-4c7643ceb277ad69b1333e7019a7b321.stex"
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -17,7 +19,7 @@ anchor_right = 0.5
 margin_left = -60.0
 margin_right = 60.0
 margin_bottom = 60.0
-texture = ExtResource( 3 )
+texture = SubResource( 1 )
 
 [node name="MonsterDice" parent="DiceBG" instance=ExtResource( 1 )]
 position = Vector2( 90, 30 )
