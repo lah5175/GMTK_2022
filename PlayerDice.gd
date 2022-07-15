@@ -31,7 +31,3 @@ func roll():
 			sprite.animation = "5";
 		6:
 			sprite.animation = "6";
-
-
-func _on_DiceTimer_timeout():
-	roll();

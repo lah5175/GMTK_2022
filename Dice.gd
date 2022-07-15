@@ -12,4 +12,3 @@ func _ready():
 
 func generate_number():
 	number = (randi() % 6) + 1;
-	# TODO: Dice roll sound effect
