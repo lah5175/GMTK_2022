@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/558119__abdrtar__dice.mp3-637e822139290a25b918bb6ba50540ce.mp3str"
+
+[deps]
+
+source_file="res://Sounds/558119__abdrtar__dice.mp3"
+dest_files=[ "res://.import/558119__abdrtar__dice.mp3-637e822139290a25b918bb6ba50540ce.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
