@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Dice",
 "language": "GDScript",
 "path": "res://Dice.gd"
+}, {
+"base": "Node2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Enemy.gd"
 } ]
 _global_script_class_icons={
-"Dice": ""
+"Dice": "",
+"Enemy": ""
 }
 
 [application]
