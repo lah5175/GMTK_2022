@@ -41,7 +41,6 @@ func spawn_projectile():
 	proj.direction = dir;
 	
 func attack():
-	print(roll)
 	match roll:
 		1:
 			spawn_projectile();
