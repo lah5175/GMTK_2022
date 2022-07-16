@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player_Elements/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://CameraFollow.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Soldier.tscn" type="PackedScene" id=5]
 [ext_resource path="res://WorldSprites.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World_Elements/Folliage.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World_Elements/Switch.tscn" type="PackedScene" id=8]
 
 [node name="MainScene" type="Node2D"]
 
@@ -35,6 +36,15 @@ tile_data = PoolIntArray( -1114105, 37, 0, -1114099, 37, 0, -1048569, 40, 0, -10
 
 [node name="TileMap_AboveFolliage" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( -1179645, 536870975, 131075, -1179644, 63, 262149, -1179643, 63, 131075, -1179642, 53, 4, -1179633, 536870975, 131075, -1179632, 63, 262149, -1179631, 63, 131075, -1179630, 53, 4, -1114112, 60, 196616, -1114109, 53, 3, -1114108, 53, 1, -1114107, 53, 3, -1114097, 53, 3, -1114096, 53, 1, -1114095, 53, 3, -1114093, 60, 196616, -1048572, 53, 65537, -1048569, 53, 0, -1048563, 53, 0, -1048560, 53, 65537, -983039, 60, 196616, -983036, 53, 65537, -983033, 53, 131072, -983027, 53, 131072, -983024, 53, 65537, -917500, 53, 65537, -917488, 53, 65537, -917484, 60, 196617, -851964, 53, 65537, -851961, 53, 0, -851955, 53, 0, -851952, 53, 65537, -851949, 60, 196616, -786432, 60, 196616, -786428, 53, 131073, -786425, 53, 131072, -786419, 53, 131072, -786416, 53, 131073, -655353, 53, 0, -655347, 53, 0, -655342, 60, 196616, -589820, 60, 65542, -589818, 60, 65542, -589817, 53, 131072, -589811, 53, 131072, -589810, 60, 65542, -589808, 60, 65542 )
+
+[node name="SwitchArea" parent="." instance=ExtResource( 8 )]
+position = Vector2( 170, -101 )
+
+[node name="SwitchArea" parent="SwitchArea" instance=ExtResource( 8 )]
+position = Vector2( 16, 1 )
+
+[node name="SwitchArea2" parent="SwitchArea" instance=ExtResource( 8 )]
+position = Vector2( -17, 1 )
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 

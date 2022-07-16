@@ -9,6 +9,7 @@ signal game_over;
 var current_hp: int = 10;
 var max_hp: int = 10;
 var move_speed: int = 125;
+var keys: int = 0;
 
 # Attack variables
 var attack_cooldown_time = 1000;
