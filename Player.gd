@@ -19,7 +19,7 @@ onready var sprite = $AnimatedSprite;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	face_direction.y = 1; # To prevent frame 1 attack crash
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,28 +27,32 @@ func _ready():
 #	pass
 
 
-func _physics_process (delta):
-	if is_attacking:
-		velocity = 0.3 * velocity;
-		
+func _physics_process (delta):		
 	velocity = Vector2();
-	if not is_attacking:
-		if Input.is_action_pressed("move_up"):
-			velocity.y -= 1;
-			face_direction = Vector2(0, -1);
-		if Input.is_action_pressed("move_down"):
-			velocity.y += 1;
-			face_direction = Vector2(0, 1);
-		if Input.is_action_pressed("move_left"):
-			velocity.x -= 1;
-			face_direction = Vector2(-1, 0);
-		if Input.is_action_pressed("move_right"):
-			velocity.x += 1;
-			face_direction = Vector2(1, 0);
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1;
+		face_direction = Vector2(0, -1);
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1;
+		face_direction = Vector2(0, 1);
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1;
+		face_direction = Vector2(-1, 0);
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1;
+		face_direction = Vector2(1, 0);
 
-		velocity = velocity.normalized();
-		move_and_slide(velocity * move_speed, Vector2.ZERO);
-		manage_animations();
+	velocity = velocity.normalized();
+	move_and_slide(velocity * move_speed, Vector2.ZERO);
+	manage_animations();
+		
+	if Input.is_action_just_pressed("attack"):
+		is_attacking = true;
+		var animation = getAttackAnimation();
+		$AnimatedSprite.play(animation);
+	if Input.is_action_just_released("attack"):
+		is_attacking = false;
+		
 
 func manage_animations ():
 	if velocity.x > 0:
@@ -82,12 +86,3 @@ func play_animation (sprite_name):
 	if sprite.animation != sprite_name:
 		sprite.play(sprite_name);
 
-func _input(event):
-	if event.is_action_pressed("attack"):
-		is_attacking = true;
-		var animation = getAttackAnimation();
-		$AnimatedSprite.play(animation);
-
-
-func _on_AnimatedSprite_animation_finished():
-	is_attacking = false;

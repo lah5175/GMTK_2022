@@ -20,14 +20,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "MoveLeft",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "MoveDown",
+"name": "MoveUp",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
@@ -35,9 +30,14 @@ animations = [ {
 "name": "MoveRight",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 13 ) ],
 "loop": true,
-"name": "MoveUp",
+"name": "MoveDown",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "MoveLeft",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -45,9 +45,14 @@ animations = [ {
 "name": "IdleDown",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "IdleRight",
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "AttackDown",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": false,
+"name": "AttackRight",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -60,24 +65,19 @@ animations = [ {
 "name": "IdleLeft",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
-"loop": false,
-"name": "AttackLeft",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 15 ) ],
 "loop": false,
 "name": "AttackUp",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ) ],
-"loop": false,
-"name": "AttackDown",
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "IdleRight",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": false,
-"name": "AttackRight",
+"name": "AttackLeft",
 "speed": 5.0
 } ]
 
@@ -98,5 +98,3 @@ playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
