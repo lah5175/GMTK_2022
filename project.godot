@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player.gd"
+}, {
+"base": "Area2D",
+"class": "RatProjectile",
+"language": "GDScript",
+"path": "res://RatProjectile.gd"
 } ]
 _global_script_class_icons={
 "Dice": "",
 "Enemy": "",
-"Player": ""
+"Player": "",
+"RatProjectile": ""
 }
 
 [application]

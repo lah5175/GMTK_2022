@@ -3,7 +3,6 @@ extends Control
 
 onready var player_dice = get_node("DiceBG/PlayerDice");
 onready var monster_dice = get_node("DiceBG/MonsterDice");
-onready var collision_timer = $CollisionTimer;
 
 
 # Called when the node enters the scene tree for the first time.

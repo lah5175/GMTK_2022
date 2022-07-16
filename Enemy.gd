@@ -26,8 +26,8 @@ func attack():
 	pass;
 
 
-func take_damage(damage):
-	current_hp -= damage;
+func take_damage(dmg):
+	current_hp -= dmg;
 	if current_hp <= 0:
 		die();
 		
