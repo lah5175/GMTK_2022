@@ -31,7 +31,7 @@ position = Vector2( 30, 30 )
 wait_time = 10.0
 autostart = true
 
-[node name="DiceSFX" type="AudioStreamPlayer" parent="."]
+[node name="DiceSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
 [connection signal="timeout" from="DiceTimer" to="." method="_on_DiceTimer_timeout"]

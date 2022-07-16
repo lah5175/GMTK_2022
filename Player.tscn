@@ -110,7 +110,7 @@ one_shot = true
 [node name="DamagedSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 19 )
 
-[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 18 )
 
 [connection signal="timeout" from="IFrames" to="." method="_on_IFrames_timeout"]

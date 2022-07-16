@@ -103,12 +103,12 @@ func take_damage(damage):
 	if !is_invulnerable:
 		is_invulnerable = true;
 		current_hp -= damage;
-		$DamagedSFX.play();
 		
 		if current_hp <= 0:
 			die();
 		else:
 			$IFrames.start();
+			$DamagedSFX.play();
 			# This implementation will cause a problem if the same Area2D
 			# needs to hit multiple times
 
