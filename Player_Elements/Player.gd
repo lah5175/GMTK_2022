@@ -11,7 +11,6 @@ var max_hp: int = 10;
 var move_speed: int = 125;
 
 # Attack variables
-var is_attacking : bool = false;
 var attack_cooldown_time = 1000;
 var next_attack_time = 0;
 var attack_damage = 30;
@@ -20,16 +19,23 @@ var attack_damage = 30;
 var velocity = Vector2();
 var face_direction = Vector2();
 
+var roll: int = 1;
 var is_invulnerable: bool = false;
+
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
+onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 onready var sprite = $AnimatedSprite;
 onready var attackArea = $AttackArea;
+
+# Preload weapons so we can instance them later
+var arrow_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack2.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AttackArea/CollisionShape2D.disabled = true;
 	face_direction.y = 1; # To prevent frame 1 attack crash
 	healthNode.update_hp(max_hp, current_hp)
+	ui.connect("roll_results", self, "_on_UI_roll_results");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -57,18 +63,28 @@ func _physics_process (delta):
 		
 	# Attacking inputs
 	if Input.is_action_just_pressed("attack"):
-		is_attacking = true;
-		$AttackArea/CollisionShape2D.disabled = false;
-		$AttackTimer.start()
-		var animation = getAttackAnimation();
-		$AnimatedSprite.play(animation);
-	if Input.is_action_just_released("attack"):
-		is_attacking = false;
+		attack();
 		
 	# Flash character if they are invulnerable
 	if is_invulnerable:
 		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0;
 		
+func getCardinalRotation():
+	var cardinal_direction = {
+		"up": PI,
+		"down": 0,
+		"left": PI/2,
+		"right": -PI/2
+	}
+	
+	if face_direction.x == 1:
+		return cardinal_direction.right;
+	elif face_direction.x == -1:
+		return cardinal_direction.left;
+	elif face_direction.y == -1:
+		return cardinal_direction.up;
+	elif face_direction.y == 1:
+		return cardinal_direction.down;
 
 func manage_animations ():
 	if velocity.x > 0:
@@ -89,17 +105,14 @@ func manage_animations ():
 		play_animation("IdleDown");
 
 func getAttackAnimation():
+	attackArea.rotation = getCardinalRotation();
 	if face_direction.x == 1:
-		attackArea.rotation = -PI/2;
 		return "AttackRight";
 	elif face_direction.x == -1:
-		attackArea.rotation = PI/2;
 		return "AttackLeft";
 	elif face_direction.y == -1:
-		attackArea.rotation = PI;
 		return "AttackUp";
 	elif face_direction.y == 1:
-		attackArea.rotation = 0;
 		return "AttackDown";
 		
 func play_animation (sprite_name):
@@ -124,13 +137,50 @@ func die():
 	$DeathSFX.play();
 	print("I'M DEAD")
 	emit_signal("game_over"); # TODO: Connect this signal
-
+	
+# Attack functions
+func swing_sword():
+	$AttackArea/CollisionShape2D.disabled = false;
+	$AttackTimer.start()
+	var animation = getAttackAnimation();
+	$AnimatedSprite.play(animation);
+	
+func shoot_arrow():
+	var arrow = arrow_factory.instance();
+	add_child(arrow);
+	arrow.global_position = global_position;
+	arrow.direction = face_direction;
+	arrow.rotation = getCardinalRotation();
+	$ArrowSFX.play();
+	
+func attack():
+	match roll:
+		1:
+			swing_sword();
+		2:
+			shoot_arrow();
+		3:
+			swing_sword();
+		4:
+			swing_sword();
+		5:
+			swing_sword();
+		6:
+			swing_sword();
+		_:
+			swing_sword();
+			print("If you get this message, there's a bug in Player.gd");
+	
+# Signal Functions
 func _on_IFrames_timeout():
 	is_invulnerable = false;
 	modulate.a = 1.0;
 
 func _on_AttackTimer_timeout():
 	$AttackArea/CollisionShape2D.disabled = true;
+	
+func _on_UI_roll_results(player, monster):
+	roll = player;
 	
 # Function overrides
 

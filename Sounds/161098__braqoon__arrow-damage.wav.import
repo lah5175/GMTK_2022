@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/161098__braqoon__arrow-damage.wav-6440b65c4fdba45b528e22d31c698d88.sample"
+
+[deps]
+
+source_file="res://Sounds/161098__braqoon__arrow-damage.wav"
+dest_files=[ "res://.import/161098__braqoon__arrow-damage.wav-6440b65c4fdba45b528e22d31c698d88.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
