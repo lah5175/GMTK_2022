@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player_Elements/Weapon_Types/PlayerAttack2.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Projectiles/arrow.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Weapons/arrow.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 10 )
