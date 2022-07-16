@@ -1,41 +1,53 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PlayerDice.gd" type="Script" id=1]
-[ext_resource path="res://Dice/dice_hero_5.png" type="Texture" id=2]
-[ext_resource path="res://Dice/dice_hero_2.png" type="Texture" id=3]
-[ext_resource path="res://Dice/dice_hero_4.png" type="Texture" id=4]
-[ext_resource path="res://Dice/dice_hero_6.png" type="Texture" id=5]
-[ext_resource path="res://Dice/dice_hero_3.png" type="Texture" id=6]
-[ext_resource path="res://Dice/dice_hero_1.png" type="Texture" id=7]
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/dice_hero_2.png-dc434c226fcdcea03293518117b91214.stex"
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/dice_hero_5.png-247ad88dd06b1f0fd0a3c993db8a92a2.stex"
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/dice_hero_4.png-b78b0c2791bbd34d4e474d08006e75ee.stex"
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/dice_hero_3.png-f612317639775aa68eb4d803901aa250.stex"
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/dice_hero_1.png-019482131c776e8103009a1909618e77.stex"
+
+[sub_resource type="StreamTexture" id=7]
+load_path = "res://.import/dice_hero_6.png-b631b24b63622642a92b85d1646fe403.stex"
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
 "name": "3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "1",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "6",
 "speed": 5.0
