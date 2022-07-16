@@ -12,13 +12,13 @@ var attack_rate: float = 1.0;
 
 
 onready var target = get_node("/root/MainScene/Player");
+#onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Don't set anything here because if another _ready function
-	# overwrites this one, the timer won't be set
 	pass;
+#	ui.connect("enemy_hit", self, "_on_Enemy_enemy_hit");
 
 
 # Replace with an actual attack function in child
@@ -34,3 +34,8 @@ func take_damage(dmg):
 	
 func die():
 	queue_free(); 
+	
+
+# Function Overrides
+
+func get_class(): return "Enemy";

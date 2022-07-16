@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player_Elements/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/player_s_0.png" type="Texture" id=2]
@@ -19,12 +19,13 @@
 [ext_resource path="res://Sprites/Player/player_e_attack.png" type="Texture" id=17]
 [ext_resource path="res://Sounds/397276__whisperbandnumber1__grunt1.wav" type="AudioStream" id=18]
 [ext_resource path="res://Sounds/257780__xtrgamr__man-oof.wav" type="AudioStream" id=19]
+[ext_resource path="res://Player_Elements/AttackArea.gd" type="Script" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 13 ) ],
 "loop": true,
-"name": "MoveRight",
+"name": "MoveDown",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 7 ) ],
@@ -32,14 +33,14 @@ animations = [ {
 "name": "MoveLeft",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "MoveDown",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "MoveUp",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "MoveRight",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -47,29 +48,14 @@ animations = [ {
 "name": "IdleUp",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "IdleLeft",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": false,
-"name": "AttackLeft",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ) ],
-"loop": false,
-"name": "AttackDown",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "IdleDown",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ) ],
-"loop": false,
-"name": "AttackRight",
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "IdleLeft",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 15 ) ],
@@ -80,6 +66,21 @@ animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "IdleRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "AttackDown",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": false,
+"name": "AttackLeft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": false,
+"name": "AttackRight",
 "speed": 5.0
 } ]
 
@@ -117,6 +118,7 @@ stream = ExtResource( 18 )
 
 [node name="AttackArea" type="Area2D" parent="." groups=["PlayerAttack"]]
 rotation = -3.14159
+script = ExtResource( 20 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -131,4 +133,5 @@ wait_time = 0.05
 one_shot = true
 
 [connection signal="timeout" from="IFrames" to="." method="_on_IFrames_timeout"]
+[connection signal="body_entered" from="AttackArea" to="AttackArea" method="_on_AttackArea_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

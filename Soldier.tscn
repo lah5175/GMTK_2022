@@ -19,4 +19,8 @@ shape = SubResource( 2 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 
+[node name="FlickerTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="FlickerTimer" to="." method="_on_FlickerTimer_timeout"]

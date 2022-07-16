@@ -131,8 +131,7 @@ func _on_IFrames_timeout():
 
 func _on_AttackTimer_timeout():
 	$AttackArea/CollisionShape2D.disabled = true;
+	
 # Function overrides
 
 func get_class(): return "Player";
-
-

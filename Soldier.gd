@@ -58,6 +58,10 @@ func attack():
 		_:
 			spawn_projectile();
 			print("If you get this message, there's a bug in Soldier.gd");
+			
+
+func start_flicker_timer():
+	$FlickerTimer.start();
 
 
 func _on_AttackTimer_timeout():
@@ -68,3 +72,7 @@ func _on_UI_roll_results(_player, monster):
 	print("signal received");
 	roll = monster;
 	is_ready_for_rolls = true;
+
+
+func _on_FlickerTimer_timeout():
+	modulate.a = 1.0;
