@@ -20,7 +20,10 @@ var velocity = Vector2();
 var face_direction = Vector2();
 
 var roll: int = 1;
+
+# Bools linked to timers
 var is_invulnerable: bool = false;
+var can_place_bomb: bool = true;
 
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -29,6 +32,7 @@ onready var attackArea = $AttackArea;
 
 # Preload weapons so we can instance them later
 var arrow_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack2.tscn");
+var bomb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack3.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -153,6 +157,29 @@ func shoot_arrow():
 	arrow.rotation = getCardinalRotation();
 	$ArrowSFX.play();
 	
+func place_bomb():
+	if can_place_bomb:
+		move_speed = 0;
+		var bomb = bomb_factory.instance();
+		bomb.position = position;
+		
+		# We will need to tweak these values if the size of the player sprite changes
+		if face_direction.x == 1:
+			bomb.position.x += 15;
+		elif face_direction.x == -1:
+			bomb.position.x -= 15;
+		elif face_direction.y == -1:
+			bomb.position.y -= 17;
+		elif face_direction.y == 1:
+			bomb.position.y += 15;
+			
+		get_node("..").add_child(bomb);
+		move_speed = 125;
+		
+		can_place_bomb = false;
+		$BombTimer.start();
+	
+	
 func attack():
 	match roll:
 		1:
@@ -160,7 +187,7 @@ func attack():
 		2:
 			shoot_arrow();
 		3:
-			swing_sword();
+			place_bomb();
 		4:
 			swing_sword();
 		5:
@@ -182,6 +209,10 @@ func _on_AttackTimer_timeout():
 func _on_UI_roll_results(player, monster):
 	roll = player;
 	
+func _on_BombTimer_timeout():
+	can_place_bomb = true;
+
 # Function overrides
 
 func get_class(): return "Player";
+
