@@ -18,7 +18,6 @@ func _physics_process(delta):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	print("Arrow destroyed");
 	queue_free();
 
 
