@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 var current_hp: int = 10;
 var max_hp: int = 10;
-var move_speed: int = 250;
+var move_speed: int = 125;
 
 # Attack variables
 var is_attacking : bool = false;
@@ -28,27 +28,32 @@ func _ready():
 
 
 func _physics_process (delta):
-	if is_attacking:
-		velocity = 0.3 * velocity;
-		
 	velocity = Vector2();
-	if not is_attacking:
-		if Input.is_action_pressed("move_up"):
-			velocity.y -= 1;
-			face_direction = Vector2(0, -1);
-		if Input.is_action_pressed("move_down"):
-			velocity.y += 1;
-			face_direction = Vector2(0, 1);
-		if Input.is_action_pressed("move_left"):
-			velocity.x -= 1;
-			face_direction = Vector2(-1, 0);
-		if Input.is_action_pressed("move_right"):
-			velocity.x += 1;
-			face_direction = Vector2(1, 0);
+#	if not is_attacking:
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1;
+		face_direction = Vector2(0, -1);
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1;
+		face_direction = Vector2(0, 1);
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1;
+		face_direction = Vector2(-1, 0);
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1;
+		face_direction = Vector2(1, 0);
 
-		velocity = velocity.normalized();
-		move_and_slide(velocity * move_speed, Vector2.ZERO);
-		manage_animations();
+	velocity = velocity.normalized();
+	move_and_slide(velocity * move_speed, Vector2.ZERO);
+	manage_animations();
+		
+	if Input.is_action_just_pressed("attack"):
+		is_attacking = true;
+		var animation = getAttackAnimation();
+		$AnimatedSprite.play(animation);
+	if Input.is_action_just_released("attack"):
+		is_attacking = false;
+
 
 func manage_animations ():
 	if velocity.x > 0:
@@ -87,7 +92,3 @@ func _input(event):
 		is_attacking = true;
 		var animation = getAttackAnimation();
 		$AnimatedSprite.play(animation);
-
-
-func _on_AnimatedSprite_animation_finished():
-	is_attacking = false;
