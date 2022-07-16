@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://MonsterDice.tscn" type="PackedScene" id=1]
-[ext_resource path="res://PlayerDice.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI_Elements/MonsterDice.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI_Elements/PlayerDice.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Dice/dicebox.png" type="Texture" id=3]
 [ext_resource path="res://Sounds/558119__abdrtar__dice.mp3" type="AudioStream" id=4]
-[ext_resource path="res://UI.gd" type="Script" id=5]
+[ext_resource path="res://UI_Elements/UI.gd" type="Script" id=5]
+[ext_resource path="res://UI_Elements/HealthBar.tscn" type="PackedScene" id=6]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -34,4 +35,13 @@ autostart = true
 [node name="DiceSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
+[node name="Health" parent="." instance=ExtResource( 6 )]
+margin_left = 251.0
+margin_top = 142.0
+margin_right = 285.0
+margin_bottom = 176.0
+
 [connection signal="timeout" from="DiceTimer" to="." method="_on_DiceTimer_timeout"]
+
+[editable path="Health"]
+[editable path="Health/HealthDice"]
