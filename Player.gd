@@ -54,12 +54,17 @@ func _physics_process (delta):
 	move_and_slide(velocity * move_speed, Vector2.ZERO);
 	manage_animations();
 		
+	# Attacking inputs
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true;
 		var animation = getAttackAnimation();
 		$AnimatedSprite.play(animation);
 	if Input.is_action_just_released("attack"):
 		is_attacking = false;
+		
+	# Flash character if they are invulnerable
+	if is_invulnerable:
+		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0;
 		
 
 func manage_animations ():
@@ -97,8 +102,9 @@ func play_animation (sprite_name):
 func take_damage(damage):
 	if !is_invulnerable:
 		is_invulnerable = true;
-		print("I am hit")
 		current_hp -= damage;
+		$DamagedSFX.play();
+		
 		if current_hp <= 0:
 			die();
 		else:
@@ -114,6 +120,7 @@ func die():
 
 func _on_IFrames_timeout():
 	is_invulnerable = false;
+	modulate.a = 1.0;
 
 
 # Function overrides

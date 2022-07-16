@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/player_s_0.png" type="Texture" id=2]
@@ -18,9 +18,20 @@
 [ext_resource path="res://Sprites/Player/player_s_attack.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/Player/player_e_attack.png" type="Texture" id=17]
 [ext_resource path="res://Sounds/397276__whisperbandnumber1__grunt1.wav" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/257780__xtrgamr__man-oof.wav" type="AudioStream" id=19]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "MoveDown",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "MoveUp",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "MoveRight",
@@ -31,19 +42,9 @@ animations = [ {
 "name": "MoveLeft",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "MoveUp",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "MoveDown",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "IdleDown",
+"name": "IdleUp",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 17 ) ],
@@ -51,14 +52,9 @@ animations = [ {
 "name": "AttackRight",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "IdleUp",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 16 ) ],
 "loop": false,
-"name": "AttackUp",
+"name": "AttackDown",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -66,19 +62,24 @@ animations = [ {
 "name": "IdleRight",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "IdleLeft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": false,
+"name": "AttackUp",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": false,
 "name": "AttackLeft",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ) ],
-"loop": false,
-"name": "AttackDown",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "IdleLeft",
+"name": "IdleDown",
 "speed": 5.0
 } ]
 
@@ -105,6 +106,9 @@ shape = SubResource( 2 )
 
 [node name="IFrames" type="Timer" parent="."]
 one_shot = true
+
+[node name="DamagedSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
