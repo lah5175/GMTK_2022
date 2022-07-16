@@ -1,6 +1,11 @@
 extends KinematicBody2D
+class_name Player
 
 
+signal game_over;
+
+
+# Basic parameters
 var current_hp: int = 10;
 var max_hp: int = 10;
 var move_speed: int = 125;
@@ -11,8 +16,11 @@ var attack_cooldown_time = 1000;
 var next_attack_time = 0;
 var attack_damage = 30;
 
+# Movement variables
 var velocity = Vector2();
 var face_direction = Vector2();
+
+var is_invulnerable: bool = false;
 
 onready var sprite = $AnimatedSprite;
 
@@ -85,4 +93,31 @@ func getAttackAnimation():
 func play_animation (sprite_name):
 	if sprite.animation != sprite_name:
 		sprite.play(sprite_name);
+		
+func take_damage(damage):
+	if !is_invulnerable:
+		is_invulnerable = true;
+		print("I am hit")
+		current_hp -= damage;
+		if current_hp <= 0:
+			die();
+		else:
+			$IFrames.start();
+			# This implementation will cause a problem if the same Area2D
+			# needs to hit multiple times
+
+func die():
+	hide();
+	$DeathSFX.play();
+	print("I'M DEAD")
+	emit_signal("game_over"); # TODO: Connect this signal
+
+func _on_IFrames_timeout():
+	is_invulnerable = false;
+
+
+# Function overrides
+
+func get_class(): return "Player";
+
 

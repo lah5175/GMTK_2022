@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dice_monster_2.png-df23dcf67aa0c206f2818e5c92b386af.stex"
+path="res://.import/dice_monster_1.png-660a04969fda1b781c4dd612bccde663.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice/dice_monster_2.png"
-dest_files=[ "res://.import/dice_monster_2.png-df23dcf67aa0c206f2818e5c92b386af.stex" ]
+source_file="res://Sprites/Dice/dice_monster_1.png"
+dest_files=[ "res://.import/dice_monster_1.png-660a04969fda1b781c4dd612bccde663.stex" ]
 
 [params]
 

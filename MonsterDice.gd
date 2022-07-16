@@ -8,7 +8,6 @@ onready var sprite = $AnimatedSprite;
 func _ready():
 	randomize();
 	roll();
-	print(number);
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
