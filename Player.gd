@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 var current_hp: int = 10;
 var max_hp: int = 10;
-var move_speed: int = 250;
+var move_speed: int = 125;
 
 # Attack variables
 var is_attacking : bool = false;
