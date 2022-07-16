@@ -82,10 +82,11 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 4.0
-height = 8.0
+radius = 20.0
+height = 13.3333
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

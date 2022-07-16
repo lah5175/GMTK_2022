@@ -14,9 +14,11 @@ script = ExtResource( 5 )
 [node name="DiceBG" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -60.0
-margin_right = 60.0
-margin_bottom = 60.0
+margin_left = -17.0
+margin_top = 2.0
+margin_right = 103.0
+margin_bottom = 62.0
+rect_scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 
 [node name="MonsterDice" parent="DiceBG" instance=ExtResource( 1 )]
