@@ -16,7 +16,7 @@ onready var target = get_node("/root/MainScene/Player");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Don't set attack timer here because if another _ready function
+	# Don't set anything here because if another _ready function
 	# overwrites this one, the timer won't be set
 	pass;
 
