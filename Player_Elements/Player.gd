@@ -21,14 +21,15 @@ var velocity = Vector2();
 var face_direction = Vector2();
 
 var is_invulnerable: bool = false;
-
+onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var sprite = $AnimatedSprite;
-
+onready var attackArea = $AttackArea;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AttackArea/CollisionShape2D.disabled = true;
 	face_direction.y = 1; # To prevent frame 1 attack crash
-
+	healthNode.update_hp(max_hp, current_hp)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -57,6 +58,8 @@ func _physics_process (delta):
 	# Attacking inputs
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true;
+		$AttackArea/CollisionShape2D.disabled = false;
+		$AttackTimer.start()
 		var animation = getAttackAnimation();
 		$AnimatedSprite.play(animation);
 	if Input.is_action_just_released("attack"):
@@ -79,7 +82,7 @@ func manage_animations ():
 	elif face_direction.x == 1:
 		play_animation("IdleRight");
 	elif face_direction.x == -1:
-		play_animation("IdleLeft");
+		 play_animation("IdleLeft");
 	elif face_direction.y == -1:
 		play_animation("IdleUp");
 	elif face_direction.y == 1:
@@ -87,12 +90,16 @@ func manage_animations ():
 
 func getAttackAnimation():
 	if face_direction.x == 1:
+		attackArea.rotation = -PI/2;
 		return "AttackRight";
 	elif face_direction.x == -1:
-		 return "AttackLeft";
+		attackArea.rotation = PI/2;
+		return "AttackLeft";
 	elif face_direction.y == -1:
+		attackArea.rotation = PI;
 		return "AttackUp";
 	elif face_direction.y == 1:
+		attackArea.rotation = 0;
 		return "AttackDown";
 		
 func play_animation (sprite_name):
@@ -103,7 +110,7 @@ func take_damage(damage):
 	if !is_invulnerable:
 		is_invulnerable = true;
 		current_hp -= damage;
-		
+		healthNode.update_hp(current_hp, max_hp);
 		if current_hp <= 0:
 			die();
 		else:
@@ -122,7 +129,8 @@ func _on_IFrames_timeout():
 	is_invulnerable = false;
 	modulate.a = 1.0;
 
-
+func _on_AttackTimer_timeout():
+	$AttackArea/CollisionShape2D.disabled = true;
 # Function overrides
 
 func get_class(): return "Player";

@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI_Elements/HealthDice.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Dice/health_dice/health_dicebox.png" type="Texture" id=2]
+[ext_resource path="res://Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://UI_Elements/HealthBar.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = -1.0
+margin_right = 120.0
+margin_bottom = 59.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="HealthDice" parent="." instance=ExtResource( 1 )]
+position = Vector2( 45, 14 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = -7.0
+margin_top = 16.0
+margin_right = 33.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+text = "10"
+align = 2
+
+[node name="Label" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 42.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 2 )
+text = "HP"
+
+[editable path="HealthDice"]

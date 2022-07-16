@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Dice",
 "language": "GDScript",
-"path": "res://Dice.gd"
+"path": "res://UI_Elements/Dice.gd"
 }, {
 "base": "Node2D",
 "class": "Enemy",
@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Player.gd"
+"path": "res://Player_Elements/Player.gd"
 }, {
 "base": "Area2D",
 "class": "RatProjectile",
