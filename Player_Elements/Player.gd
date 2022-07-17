@@ -38,9 +38,9 @@ var bomb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack3.tsc
 var orb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack5.tscn");
 var shield_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack6.tscn");
 
-onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
-onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
-onready var door : AnimatedSprite = get_node("/root/MainScene/BossDoor/AnimatedSprite");
+onready var healthNode = get_tree().get_root().get_node("SceneManager/MainScene/CanvasLayer/UI/Health")
+onready var ui = get_node("/root/SceneManager/MainScene/CanvasLayer/UI");
+onready var door : AnimatedSprite = get_node("/root/SceneManager/MainScene/BossDoor/AnimatedSprite");
 
 onready var sprite = $AnimatedSprite;
 onready var attackArea = $AttackArea;

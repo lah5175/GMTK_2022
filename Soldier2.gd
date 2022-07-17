@@ -33,7 +33,7 @@ var orb_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack3.tscn
 var circle_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack4.tscn");
 
 onready var timer = $AttackTimer;
-onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
+onready var ui = get_node("/root/SceneManager/MainScene/CanvasLayer/UI");
 onready var sprite = $AnimatedSprite;
 
 # Called when the node enters the scene tree for the first time.

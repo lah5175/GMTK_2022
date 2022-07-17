@@ -14,7 +14,7 @@ var attack_dist: int = 15;
 
 
 
-onready var target = get_tree().get_root().get_node("MainScene/Player");
+onready var target = get_tree().get_root().get_node("SceneManager/MainScene/Player");
 #onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 
 
