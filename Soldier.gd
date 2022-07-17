@@ -5,6 +5,7 @@ var is_ready_for_rolls: bool = false;
 var projectile_speed: int = 300;
 var roll: int = 1;
 
+
 # Preload assets for attacks
 var rat_projectile = preload("res://RatProjectile.tscn");
 
@@ -31,6 +32,7 @@ func set_params():
 func spawn_projectile():
 	# Create a RatProjectile node and attach it to the main scene
 	var proj = rat_projectile.instance();
+	get_node("..").add_child(proj);
 	
 	# Set the initial position, direction, and rotation
 	# I don't really know, this is some black magic stuff
@@ -38,7 +40,6 @@ func spawn_projectile():
 	var dir = (target.global_position - proj.global_position).normalized();
 	proj.global_rotation = dir.angle() + PI / 2.0;
 	proj.direction = dir;
-	get_node("..").add_child(proj);
 	
 func attack():
 	match roll:

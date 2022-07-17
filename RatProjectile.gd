@@ -31,3 +31,17 @@ func _on_RatProjectile_body_entered(body):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free();
+	
+
+func _on_RatProjectile_area_entered(area):
+	var collider_type = area.get_class();
+	print(collider_type);
+	if collider_type == "ParticleShield":
+		area.reflect(damage);
+		queue_free();
+
+
+# Function overrides
+
+func get_class(): return "EnemyProjectile";
+

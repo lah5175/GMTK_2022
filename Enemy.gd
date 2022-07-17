@@ -11,7 +11,7 @@ var damage: int = 1;
 var attack_rate: float = 1.0;
 
 
-onready var target = get_node("/root/MainScene/Player");
+onready var target = get_tree().get_root().get_node("MainScene/Player");
 #onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 
 

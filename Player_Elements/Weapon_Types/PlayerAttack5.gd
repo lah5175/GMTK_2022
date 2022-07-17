@@ -16,7 +16,6 @@ func _physics_process(delta):
 
 
 func _on_Timer_timeout():
-	print("particle gone");
 	queue_free();
 
 
@@ -24,4 +23,6 @@ func _on_PlayerAttack5_body_entered(body):
 	var collider_type = body.get_class();
 	if collider_type == "Enemy":
 		body.take_damage(damage);
+		body.modulate.a = 0.5;
+		body.start_flicker_timer();
 		queue_free();
