@@ -6,6 +6,7 @@ var roll: int = 1;
 
 var is_casting: bool = false;
 var is_slime_spawned = false;
+var is_circle_placed = false;
 
 var attack_rates = {
 	"1": 0.5,
@@ -29,6 +30,7 @@ var attack_distances = {
 var rat_projectile = preload("res://RatProjectile.tscn");
 var cone_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack5.tscn");
 var orb_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack3.tscn");
+var circle_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack4.tscn");
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -88,7 +90,12 @@ func shoot_homing_orbs():
 	parent.add_child(orb);
 
 func burst_circle():
-	pass;
+	var parent = get_parent();
+	var circle = circle_factory.instance();
+	parent.add_child(circle);
+	
+	circle.position = position;
+	is_circle_placed = true;
 	
 func spray_cone():
 	is_casting = true;
@@ -149,6 +156,7 @@ func _on_UI_roll_results(_player, monster):
 	print("signal received");
 	roll = monster;
 	is_slime_spawned = false;
+	is_circle_placed = false;
 	attack_rate = attack_rates[str(roll)];
 	attack_dist = attack_distances[str(roll)];
 
