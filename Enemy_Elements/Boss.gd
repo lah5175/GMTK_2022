@@ -116,6 +116,10 @@ func stop_explosion():
 	$ExplosionTimer.stop();
 	$AlertSFX.stop();
 	switch.disable_switch();
+	
+func aggro():
+	$AttackTimer.wait_time = attack_rates[str(roll)];
+	$AttackTimer.start();
 
 func _on_UI_roll_results(_player, monster):
 	roll = monster;

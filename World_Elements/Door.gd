@@ -13,3 +13,4 @@ func _on_Area2D_body_entered(body):
 		get_node("../FieldBGM").stop();
 		get_node("../BossBGM").play();
 		body.set_position(Vector2(1287,5));
+		get_node("../Boss").aggro();
