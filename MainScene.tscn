@@ -76,6 +76,7 @@ position = Vector2( 450, -440 )
 position = Vector2( -25, -523 )
 
 [node name="BossSwitch" parent="MainScene" instance=ExtResource( 13 )]
+visible = true
 position = Vector2( 1178, 55 )
 
 [node name="Boundaries" type="StaticBody2D" parent="MainScene"]
@@ -113,7 +114,7 @@ position = Vector2( 20, -17 )
 position = Vector2( 167, 102 )
 
 [node name="Boss" parent="MainScene" instance=ExtResource( 10 )]
-position = Vector2( 1293, -191 )
+position = Vector2( 1287, -187 )
 
 [node name="FieldBGM" type="AudioStreamPlayer" parent="MainScene"]
 stream = ExtResource( 14 )
@@ -166,6 +167,7 @@ position = Vector2( 166, -376 )
 [node name="Soldier4" parent="." instance=ExtResource( 17 )]
 position = Vector2( -72, -521 )
 
+[connection signal="BossKilled" from="MainScene/Boss" to="MainScene/CreditsDoor" method="_on_Boss_BossKilled"]
 [connection signal="transitioned" from="TransitionScreen" to="." method="_on_TransitionScreen_transitioned"]
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
 [connection signal="timeout" from="BulletEndTimer" to="." method="_on_BulletEndTimer_timeout"]
