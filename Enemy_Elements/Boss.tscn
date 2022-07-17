@@ -1,82 +1,17 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Sprites/SpriteSheet/King_Kyoob.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/mouse_knight_idle_s.png" type="Texture" id=1]
 [ext_resource path="res://Enemy_Elements/Boss.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/613653__melokacool__alarm.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/399303__deleted-user-5405837__explosion-012.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/music/276358__n-audioman__death.wav" type="AudioStream" id=5]
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 256, 64, 64 )
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [  ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 4 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 15 ), SubResource( 14 ), SubResource( 13 ), SubResource( 12 ), SubResource( 11 ), SubResource( 10 ), SubResource( 9 ), SubResource( 6 ), SubResource( 5 ), SubResource( 5 ), SubResource( 5 ), SubResource( 4 ), SubResource( 3 ), SubResource( 4 ), SubResource( 4 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -87,8 +22,6 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "Idle"
-frame = 16
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -107,6 +40,7 @@ one_shot = true
 
 [node name="AlertSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+volume_db = 9.614
 
 [node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )

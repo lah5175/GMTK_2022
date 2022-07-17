@@ -56,7 +56,7 @@ func _physics_process(delta):
 func set_params():
 	max_hp = 5;
 	current_hp = 5;
-	move_speed = 40;
+	move_speed = 30;
 	damage = 1;
 	attack_dist = 30;
 	attack_rate = 0.5;
@@ -123,7 +123,7 @@ func split():
 	# Make sure spawned ones don't immediatly split
 	is_casting = true;
 	var parent = get_parent();
-	var slime = load("res://Soldier.tscn").instance();
+	var slime = load("res://Soldier2.tscn").instance();
 	slime.position = position;
 	position.x += 20;
 	parent.add_child(slime);
@@ -134,21 +134,21 @@ func split():
 func attack():
 	match roll:
 		1:
-			attack_with_melee();
-		2:
-			shoot_orb();
-		3:
-			shoot_homing_orbs();
-		4:
 			burst_circle();
+		2:
+			if !is_slime_spawned:
+				split();
+		3:
+			spray_cone();
+		4:
+			attack_with_melee();
 		5:
 			spray_cone();
 		6:
-			if !is_slime_spawned:
-				split();
+			shoot_homing_orbs();
 		_:
 			attack_with_melee();
-			print("If you get this message, there's a bug in Soldier.gd");
+			print("If you get this message, there's a bug in Soldier2.gd");
 
 func start_flicker_timer():
 	$HitSound.play();
