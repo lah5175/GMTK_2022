@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/SpriteSheet/switch.png" type="Texture" id=1]
+[ext_resource path="res://Sounds/523424__andersmmg__ding-3.wav" type="AudioStream" id=2]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Area2D
+
+onready var sprite = $Sprite_State;
+onready var switchOn = false;
+
+func _ready():
+	self.connect(\"body_entered\", self, \"_on_Area2D_body_entered\")
+	self.connect(\"body_exited\", self, \"_on_Area2D_body_exited\")
+	
+func _on_Area2D_body_entered(body):
+	var collider_type = body.get_class();
+	if collider_type == \"Player\" && switchOn == false:
+		body.keys += 1;
+		print(body.keys)
+		sprite.animation = \"On\";
+		switchOn = true;
+		$dingSFX.play();
+"
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6, 5 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 11, 0, 11, 9 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 11, 9 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "On",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "Off",
+"speed": 5.0
+} ]
+
+[node name="SwitchArea" type="Area2D"]
+script = SubResource( 5 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="Sprite_State" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "Off"
+
+[node name="dingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )

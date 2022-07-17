@@ -9,6 +9,7 @@ signal game_over;
 var current_hp: int = 10;
 var max_hp: int = 10;
 var move_speed: int = 125;
+var keys: int = 0;
 
 # Attack variables
 var attack_cooldown_time = 1000;
@@ -27,6 +28,8 @@ var can_place_bomb: bool = true;
 
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
+onready var door : AnimatedSprite = get_node("/root/MainScene/BossDoor/AnimatedSprite");
+
 onready var sprite = $AnimatedSprite;
 onready var attackArea = $AttackArea;
 
@@ -72,6 +75,9 @@ func _physics_process (delta):
 	# Flash character if they are invulnerable
 	if is_invulnerable:
 		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0;
+		
+	if keys >=3:
+		door.animation = "open";
 		
 func getCardinalRotation():
 	var cardinal_direction = {
