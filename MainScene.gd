@@ -35,7 +35,7 @@ func _on_BulletTimer_timeout():
 	var velocity = Vector2(100.0, 0.0);
 	bullet.linear_velocity = velocity.rotated(direction);
 
-	bullet.player = $Player; # HACK
+	bullet.player = $MainScene/Player; # HACK
 
 	add_child(bullet);
 
