@@ -1,13 +1,15 @@
 extends Enemy
 
-var is_ready_for_rolls: bool = false;
 
 var projectile_speed: int = 300;
 var roll: int = 1;
 
+var is_casting: bool = false;
+
 
 # Preload assets for attacks
 var rat_projectile = preload("res://RatProjectile.tscn");
+var cone_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack5.tscn");
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -16,23 +18,41 @@ onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 func _ready():
 	set_params();
 	ui.connect("roll_results", self, "_on_UI_roll_results");
-
+	
+func _physics_process(delta):
+	if !is_casting:
+		var dist = position.distance_to(target.position);
+		if dist < chase_dist:
+			var vel = (target.position - position).normalized();
+			move_and_slide(vel * move_speed);
 
 func set_params():
 	max_hp = 5;
 	current_hp = 5;
-	move_speed = 100;
+	move_speed = 40;
 	damage = 1;
-	attack_rate = 1.0;
+	attack_dist = 20;
+	attack_rate = 0.5;
 		
 	timer.wait_time = attack_rate;
 	timer.start();	
 
-# Please rename this function once we have more attacks in the game
-func spawn_projectile():
+
+# Attack functions
+func attack_with_melee():
+	attack_rate = 0.5;
+	attack_dist = 20;
+	timer.wait_time = attack_rate;
+	target.take_damage(damage);
+
+# Should probably be its own scene eventually
+func shoot_orb():
+	attack_rate = 1.0;
+	timer.wait_time = attack_rate;
+	
 	# Create a RatProjectile node and attach it to the main scene
 	var proj = rat_projectile.instance();
-	get_node("..").add_child(proj);
+	get_parent().add_child(proj);
 	
 	# Set the initial position, direction, and rotation
 	# I don't really know, this is some black magic stuff
@@ -41,22 +61,46 @@ func spawn_projectile():
 	proj.global_rotation = dir.angle() + PI / 2.0;
 	proj.direction = dir;
 	
+func shoot_homing_orbs():
+	pass;
+
+func burst_circle():
+	pass;
+	
+func spray_cone():
+	attack_rate = 1.5;
+	attack_dist = 50;
+	timer.wait_time = attack_rate;
+	var cone = cone_factory.instance();
+	var parent = get_parent();
+	parent.add_child(cone);
+	
+	cone.position = position;
+	cone.direction = (target.global_position - cone.global_position).normalized();
+	cone.position.x += cone.direction.x * 20;
+	cone.position.y += cone.direction.y * 20;
+	cone.rotation = cone.direction.angle() + PI / 2;
+	
+func split():
+	pass;
+	
+	
 func attack():
 	match roll:
 		1:
-			spawn_projectile();
+			attack_with_melee();
 		2:
-			pass;
+			shoot_orb();
 		3:
-			pass;
+			shoot_homing_orbs();
 		4:
-			pass;
+			burst_circle();
 		5:
-			pass;
+			spray_cone();
 		6:
-			pass;
+			split();
 		_:
-			spawn_projectile();
+			attack_with_melee();
 			print("If you get this message, there's a bug in Soldier.gd");
 			
 
@@ -65,13 +109,12 @@ func start_flicker_timer():
 
 
 func _on_AttackTimer_timeout():
-	if is_ready_for_rolls:
+	if position.distance_to(target.position) <= attack_dist:
 		attack();
 
 func _on_UI_roll_results(_player, monster):
 	print("signal received");
 	roll = monster;
-	is_ready_for_rolls = true;
 
 
 func _on_FlickerTimer_timeout():

@@ -252,6 +252,10 @@ region = Rect2( 320, 448, 64, 64 )
 atlas = ExtResource( 2 )
 region = Rect2( 384, 448, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="AtlasTexture" id=65]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 384, 64, 64 )
@@ -276,14 +280,6 @@ region = Rect2( 128, 0, 64, 64 )
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 64 )
-
 [sub_resource type="AtlasTexture" id=76]
 atlas = ExtResource( 3 )
 region = Rect2( 192, 64, 64, 64 )
@@ -299,6 +295,10 @@ region = Rect2( 0, 192, 64, 64 )
 [sub_resource type="AtlasTexture" id=84]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -322,6 +322,11 @@ animations = [ {
 "name": "MoveUp",
 "speed": 10.0
 }, {
+"frames": [ SubResource( 66 ) ],
+"loop": true,
+"name": "IdleDown",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 65 ) ],
 "loop": true,
 "name": "IdleUp",
@@ -342,16 +347,6 @@ animations = [ {
 "name": "AttackRight",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 66 ) ],
-"loop": true,
-"name": "IdleDown",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 68 ) ],
-"loop": true,
-"name": "IdleRight",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 76 ), SubResource( 78 ) ],
 "loop": false,
 "name": "AttackLeft",
@@ -361,6 +356,11 @@ animations = [ {
 "loop": false,
 "name": "AttackUp",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 68 ) ],
+"loop": true,
+"name": "IdleRight",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -438,3 +438,4 @@ wait_time = 3.0
 [connection signal="timeout" from="BombTimer" to="." method="_on_BombTimer_timeout"]
 [connection signal="timeout" from="SpinHoldTimer" to="." method="_on_SpinHoldTimer_timeout"]
 [connection signal="timeout" from="SpinDashTimer" to="." method="_on_SpinDashTimer_timeout"]
+[connection signal="timeout" from="ShieldCooldownTimer" to="." method="_on_ShieldCooldownTimer_timeout"]
