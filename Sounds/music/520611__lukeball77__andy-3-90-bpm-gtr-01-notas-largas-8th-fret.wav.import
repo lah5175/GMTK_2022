@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/520611__lukeball77__andy-3-90-bpm-gtr-01-notas-largas-8th-fret.wav-8c3dbf7a4178e0b70b06dfab2598bb91.sample"
+
+[deps]
+
+source_file="res://Sounds/music/520611__lukeball77__andy-3-90-bpm-gtr-01-notas-largas-8th-fret.wav"
+dest_files=[ "res://.import/520611__lukeball77__andy-3-90-bpm-gtr-01-notas-largas-8th-fret.wav-8c3dbf7a4178e0b70b06dfab2598bb91.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
