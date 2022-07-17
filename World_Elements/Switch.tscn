@@ -17,7 +17,6 @@ func _on_Area2D_body_entered(body):
 	var collider_type = body.get_class();
 	if collider_type == \"Player\" && switchOn == false:
 		body.keys += 1;
-		print(body.keys)
 		sprite.animation = \"On\";
 		switchOn = true;
 		$dingSFX.play();
