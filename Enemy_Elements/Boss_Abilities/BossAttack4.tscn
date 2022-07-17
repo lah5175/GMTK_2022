@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Enemy_Abilities/boss_laser.png" type="Texture" id=1]
+[ext_resource path="res://Enemy_Elements/Boss_Abilities/BossAttack4.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Enemy_Abilities/boss_melee_warning.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Warning",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Active",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="BossAttack4" type="Area2D"]
+scale = Vector2( 5, 20 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "Warning"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="DurationTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="BurningTimer" type="Timer" parent="."]
+
+[node name="WarningTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_BossAttack4_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_BossAttack4_body_exited"]
+[connection signal="timeout" from="DurationTimer" to="." method="_on_DurationTimer_timeout"]
+[connection signal="timeout" from="BurningTimer" to="." method="_on_BurningTimer_timeout"]
+[connection signal="timeout" from="WarningTimer" to="." method="_on_WarningTimer_timeout"]
