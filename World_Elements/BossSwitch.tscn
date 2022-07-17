@@ -11,13 +11,13 @@ extents = Vector2( 6, 5 )
 atlas = ExtResource( 1 )
 region = Rect2( 22, 0, 11, 9 )
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 11, 0, 11, 9 )
-
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 11, 9 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 11, 0, 11, 9 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -26,22 +26,24 @@ animations = [ {
 "name": "disabled",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "on",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "off",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "on",
+"speed": 5.0
 } ]
 
 [node name="SwitchArea" type="Area2D"]
+visible = false
 script = ExtResource( 3 )
 
 [node name="BossSwitchCollision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite_State" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )

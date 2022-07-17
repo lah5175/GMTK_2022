@@ -4,13 +4,15 @@ signal bullet_start;
 
 var roll: int = 1;
 
+var is_exploding: bool = false;
+
 var attack_rates = {
 	"1": 3.0,
 	"2": 1.0,
 	"3": 10.00,
 	"4": 5.0,
 	"5": 3.0,
-	"6": 1.0 # Does not matter
+	"6": 10.00
 }
 
 var melee_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack1.tscn");
@@ -20,6 +22,7 @@ var laser_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack4.tsc
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/SceneManager/MainScene/CanvasLayer/UI");
+onready var switch = get_node("../BossSwitch");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,8 +35,8 @@ func _physics_process(delta):
 
 
 func set_params():
-	max_hp = 20;
-	current_hp =  20;
+	max_hp = 200;
+	current_hp =  200;
 	damage = 1;
 	
 # Attack functions
@@ -81,7 +84,10 @@ func throw_goo():
 	
 	
 func goo_explosion():
-	pass;
+	$ExplosionTimer.start();
+	$AlertSFX.play();
+	is_exploding = true;
+	switch.enable_switch();
 
 func attack():
 	match roll:
@@ -96,7 +102,8 @@ func attack():
 		5:
 			throw_goo();
 		6:
-			goo_explosion();
+			if !is_exploding:
+				goo_explosion();
 		_:
 			attack_with_melee();
 			print("If you get this message, there's a bug in Boss.gd");
@@ -104,15 +111,30 @@ func attack():
 func start_flicker_timer():
 	$FlickerTimer.start();
 
+func stop_explosion():
+	is_exploding = false;
+	$ExplosionTimer.stop();
+	$AlertSFX.stop();
+	switch.disable_switch();
 
 func _on_UI_roll_results(_player, monster):
 	roll = monster;
 	timer.wait_time = attack_rates[str(roll)];
-
+	
 
 func _on_AttackTimer_timeout():
 	attack();
+	is_exploding = false;
 
 
 func _on_FlickerTimer_timeout():
 	modulate.a = 1.0;
+
+
+func _on_ExplosionTimer_timeout():
+	$AlertSFX.stop();
+	$ExplosionSFX.play();
+	var player = get_node("../Player");
+	player.take_damage(5);
+	switch.disable_switch();
+	# Screen flash
