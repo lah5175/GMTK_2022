@@ -8,16 +8,16 @@ var is_casting: bool = false;
 var is_slime_spawned = false;
 
 var attack_rates = {
-	"1": 1.0,
+	"1": 0.5,
 	"2": 1.0,
-	"3": 2.0,
-	"4": 3.0,
+	"3": 0.5,
+	"4": 1.0, # Does not matter
 	"5": 2.0,
-	"6": 1.0
+	"6": 1.0 # Does not matter
 }
 
 var attack_distances = {
-	"1": 20,
+	"1": 30,
 	"2": chase_dist - 10,
 	"3": chase_dist - 10,
 	"4": 30,
@@ -28,6 +28,7 @@ var attack_distances = {
 # Preload assets for attacks
 var rat_projectile = preload("res://RatProjectile.tscn");
 var cone_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack5.tscn");
+var orb_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack3.tscn");
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -49,8 +50,8 @@ func set_params():
 	current_hp = 5;
 	move_speed = 40;
 	damage = 1;
-	attack_dist = 20;
-	attack_rate = 1.0;
+	attack_dist = 30;
+	attack_rate = 0.5;
 	
 func stop_casting():
 	is_casting = false;
@@ -76,7 +77,15 @@ func shoot_orb():
 	proj.direction = dir;
 	
 func shoot_homing_orbs():
-	pass;
+	timer.wait_time = attack_rate;
+	
+	var orbs: Array = [];
+	var parent = get_parent();
+
+	var orb = orb_factory.instance();
+	orb.position = position;
+	orb.target = target;
+	parent.add_child(orb);
 
 func burst_circle():
 	pass;
@@ -109,24 +118,23 @@ func split():
 	
 	
 func attack():
-	shoot_orb();
-#	match roll:
-#		1:
-#			attack_with_melee();
-#		2:
-#			shoot_orb();
-#		3:
-#			shoot_homing_orbs();
-#		4:
-#			burst_circle();
-#		5:
-#			spray_cone();
-#		6:
-#			if !is_slime_spawned:
-#				split();
-#		_:
-#			attack_with_melee();
-#			print("If you get this message, there's a bug in Soldier.gd");
+	match roll:
+		1:
+			attack_with_melee();
+		2:
+			shoot_orb();
+		3:
+			shoot_homing_orbs();
+		4:
+			burst_circle();
+		5:
+			spray_cone();
+		6:
+			if !is_slime_spawned:
+				split();
+		_:
+			attack_with_melee();
+			print("If you get this message, there's a bug in Soldier.gd");
 			
 
 func start_flicker_timer():
