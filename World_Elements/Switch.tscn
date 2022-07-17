@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/SpriteSheet/switch.png" type="Texture" id=1]
+[ext_resource path="res://Sounds/523424__andersmmg__ding-3.wav" type="AudioStream" id=2]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Area2D
@@ -19,6 +20,7 @@ func _on_Area2D_body_entered(body):
 		print(body.keys)
 		sprite.animation = \"On\";
 		switchOn = true;
+		$dingSFX.play();
 "
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -54,3 +56,6 @@ shape = SubResource( 4 )
 [node name="Sprite_State" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "Off"
+
+[node name="dingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )

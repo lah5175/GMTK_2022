@@ -28,6 +28,8 @@ var can_place_bomb: bool = true;
 
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
+onready var door : AnimatedSprite = get_node("/root/MainScene/BossDoor/AnimatedSprite");
+
 onready var sprite = $AnimatedSprite;
 onready var attackArea = $AttackArea;
 
@@ -73,6 +75,9 @@ func _physics_process (delta):
 	# Flash character if they are invulnerable
 	if is_invulnerable:
 		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0;
+		
+	if keys >=3:
+		door.animation = "open";
 		
 func getCardinalRotation():
 	var cardinal_direction = {
