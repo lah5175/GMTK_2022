@@ -32,6 +32,9 @@ position = Vector2( 30, 30 )
 wait_time = 10.0
 autostart = true
 
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="DiceSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
@@ -42,6 +45,7 @@ margin_right = 285.0
 margin_bottom = 176.0
 
 [connection signal="timeout" from="DiceTimer" to="." method="_on_DiceTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 
 [editable path="Health"]
 [editable path="Health/HealthDice"]
