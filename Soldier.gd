@@ -5,7 +5,25 @@ var projectile_speed: int = 300;
 var roll: int = 1;
 
 var is_casting: bool = false;
+var is_slime_spawned = false;
 
+var attack_rates = {
+	"1": 1.0,
+	"2": 1.0,
+	"3": 2.0,
+	"4": 3.0,
+	"5": 2.0,
+	"6": 1.0
+}
+
+var attack_distances = {
+	"1": 20,
+	"2": chase_dist - 10,
+	"3": chase_dist - 10,
+	"4": 30,
+	"5": 50,
+	"6": chase_dist
+}
 
 # Preload assets for attacks
 var rat_projectile = preload("res://RatProjectile.tscn");
@@ -22,7 +40,7 @@ func _ready():
 func _physics_process(delta):
 	if !is_casting:
 		var dist = position.distance_to(target.position);
-		if dist < chase_dist:
+		if dist < chase_dist and dist > attack_dist:
 			var vel = (target.position - position).normalized();
 			move_and_slide(vel * move_speed);
 
@@ -33,23 +51,17 @@ func set_params():
 	damage = 1;
 	attack_dist = 20;
 	attack_rate = 1.0;
-		
-	timer.wait_time = attack_rate;
-	timer.start();	
 	
 func stop_casting():
 	is_casting = false;
 
 # Attack functions
 func attack_with_melee():
-	attack_rate = 1.0;
-	attack_dist = 20;
 	timer.wait_time = attack_rate;
 	target.take_damage(damage);
 
 # Should probably be its own scene eventually
 func shoot_orb():
-	attack_rate = 1.0;
 	timer.wait_time = attack_rate;
 	
 	# Create a RatProjectile node and attach it to the main scene
@@ -71,7 +83,6 @@ func burst_circle():
 	
 func spray_cone():
 	is_casting = true;
-	attack_rate = 1.5;
 	attack_dist = 50;
 	timer.wait_time = attack_rate;
 	var cone = cone_factory.instance();
@@ -86,26 +97,36 @@ func spray_cone():
 	cone.parent = self;
 	
 func split():
-	pass;
+	# Make sure spawned ones don't immediatly split
+	is_casting = true;
+	var parent = get_parent();
+	var slime = load("res://Soldier.tscn").instance();
+	slime.position = position;
+	position.x += 20;
+	parent.add_child(slime);
+	is_slime_spawned = true;
+	is_casting = false;
 	
 	
 func attack():
-	match roll:
-		1:
-			attack_with_melee();
-		2:
-			shoot_orb();
-		3:
-			shoot_homing_orbs();
-		4:
-			burst_circle();
-		5:
-			spray_cone();
-		6:
-			split();
-		_:
-			attack_with_melee();
-			print("If you get this message, there's a bug in Soldier.gd");
+	shoot_orb();
+#	match roll:
+#		1:
+#			attack_with_melee();
+#		2:
+#			shoot_orb();
+#		3:
+#			shoot_homing_orbs();
+#		4:
+#			burst_circle();
+#		5:
+#			spray_cone();
+#		6:
+#			if !is_slime_spawned:
+#				split();
+#		_:
+#			attack_with_melee();
+#			print("If you get this message, there's a bug in Soldier.gd");
 			
 
 func start_flicker_timer():
@@ -119,6 +140,9 @@ func _on_AttackTimer_timeout():
 func _on_UI_roll_results(_player, monster):
 	print("signal received");
 	roll = monster;
+	is_slime_spawned = false;
+	attack_rate = attack_rates[str(roll)];
+	attack_dist = attack_distances[str(roll)];
 
 
 func _on_FlickerTimer_timeout():
