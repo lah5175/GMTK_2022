@@ -261,7 +261,8 @@ func attack():
 		5:
 			shoot_orbs();
 		6:
-			summon_shield();
+			if can_shield:
+				summon_shield();
 		_:
 			swing_sword();
 			print("If you get this message, there's a bug in Player.gd");

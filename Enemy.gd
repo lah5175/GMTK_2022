@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 class_name Enemy
 
 # This is a parent class for all enemies in the game.
@@ -9,6 +9,8 @@ var current_hp: int = 5;
 var move_speed: int = 100;
 var damage: int = 1;
 var attack_rate: float = 1.0;
+var chase_dist: int = 200;
+var attack_dist: int = 15;
 
 
 onready var target = get_tree().get_root().get_node("MainScene/Player");
