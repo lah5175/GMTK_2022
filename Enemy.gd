@@ -36,7 +36,7 @@ func take_damage(dmg):
 	current_hp -= dmg;
 	if current_hp <= 0:
 		playDeathSound();
-		#die();
+		die();
 		
 	
 func die():

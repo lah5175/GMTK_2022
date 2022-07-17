@@ -1,11 +1,13 @@
 extends Enemy
 
+signal bullet_start;
+
 var roll: int = 1;
 
 var attack_rates = {
 	"1": 3.0,
 	"2": 1.0,
-	"3": 0.5,
+	"3": 10.00, # This cannot trigger twice
 	"4": 5.0,
 	"5": 3.0,
 	"6": 1.0 # Does not matter
@@ -51,7 +53,8 @@ func bombs_away():
 	circle.position = target.position;
 	
 func crossfire():
-	pass
+	# See MainScene script
+	emit_signal("bullet_start");
 	
 func toxic_spew():
 	var parent = get_parent();
@@ -103,7 +106,6 @@ func start_flicker_timer():
 
 
 func _on_UI_roll_results(_player, monster):
-	print("signal received");
 	roll = monster;
 	timer.wait_time = attack_rates[str(roll)];
 
