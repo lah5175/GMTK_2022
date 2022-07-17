@@ -32,15 +32,17 @@ func set_params():
 	move_speed = 40;
 	damage = 1;
 	attack_dist = 20;
-	attack_rate = 0.5;
+	attack_rate = 1.0;
 		
 	timer.wait_time = attack_rate;
 	timer.start();	
-
+	
+func stop_casting():
+	is_casting = false;
 
 # Attack functions
 func attack_with_melee():
-	attack_rate = 0.5;
+	attack_rate = 1.0;
 	attack_dist = 20;
 	timer.wait_time = attack_rate;
 	target.take_damage(damage);
@@ -68,6 +70,7 @@ func burst_circle():
 	pass;
 	
 func spray_cone():
+	is_casting = true;
 	attack_rate = 1.5;
 	attack_dist = 50;
 	timer.wait_time = attack_rate;
@@ -80,6 +83,7 @@ func spray_cone():
 	cone.position.x += cone.direction.x * 20;
 	cone.position.y += cone.direction.y * 20;
 	cone.rotation = cone.direction.angle() + PI / 2;
+	cone.parent = self;
 	
 func split():
 	pass;
