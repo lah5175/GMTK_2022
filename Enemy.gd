@@ -13,6 +13,7 @@ var chase_dist: int = 200;
 var attack_dist: int = 15;
 
 
+
 onready var target = get_tree().get_root().get_node("MainScene/Player");
 #onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 
@@ -27,11 +28,15 @@ func _ready():
 func attack():
 	pass;
 
+# Replace with a death sound function in child
+func playDeathSound():
+	pass;
 
 func take_damage(dmg):
 	current_hp -= dmg;
 	if current_hp <= 0:
-		die();
+		playDeathSound();
+		#die();
 		
 	
 func die():
