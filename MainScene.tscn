@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player_Elements/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://CameraFollow.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://World_Elements/Folliage.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World_Elements/Switch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World_Elements/Door.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemy_Elements/Boss.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.75, 550 )
@@ -94,12 +95,15 @@ position = Vector2( 1082, 101 )
 position = Vector2( 194, 93 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 168, 105 )
+position = Vector2( 1292, -60 )
 
 [node name="YSort" type="YSort" parent="."]
 position = Vector2( 33, 9 )
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="Boss" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1293, -191 )
 
 [editable path="CanvasLayer/UI"]
 [editable path="CanvasLayer/UI/Health"]

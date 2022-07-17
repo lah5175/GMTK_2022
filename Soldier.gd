@@ -90,6 +90,7 @@ func shoot_homing_orbs():
 	parent.add_child(orb);
 
 func burst_circle():
+	timer.wait_time = attack_rate;
 	var parent = get_parent();
 	var circle = circle_factory.instance();
 	parent.add_child(circle);
