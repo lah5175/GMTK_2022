@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player_Elements/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://CameraFollow.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://World_Elements/Switch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World_Elements/Door.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Enemy_Elements/Boss.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Enemy_Elements/Boss_Abilities/BossAttack5.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.75, 550 )
@@ -107,14 +106,6 @@ position = Vector2( 33, 9 )
 
 [node name="Boss" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1293, -191 )
-
-[node name="BossAttack5" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1235, -57 )
-rotation = 2.40506
-
-[node name="BossAttack6" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1337, -57.0001 )
-rotation = 3.93572
 
 [editable path="CanvasLayer/UI"]
 [editable path="CanvasLayer/UI/Health"]
