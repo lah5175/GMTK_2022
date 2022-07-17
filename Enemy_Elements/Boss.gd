@@ -6,7 +6,7 @@ var attack_rates = {
 	"1": 3.0,
 	"2": 1.0,
 	"3": 0.5,
-	"4": 1.0, # Does not matter
+	"4": 5.0,
 	"5": 3.0,
 	"6": 1.0 # Does not matter
 }
@@ -14,6 +14,7 @@ var attack_rates = {
 var melee_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack1.tscn");
 var cone_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack5.tscn");
 var circle_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack4.tscn");
+var laser_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack4.tscn");
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -53,7 +54,15 @@ func crossfire():
 	pass
 	
 func toxic_spew():
-	pass;
+	var parent = get_parent();
+	var laser = laser_factory.instance();
+	parent.add_child(laser);
+	
+	laser.position = position;
+	laser.position.y += 120;
+	laser.direction = (target.global_position - laser.global_position).normalized();
+	laser.rotation = laser.direction.angle() + PI / 2;
+	laser.target = target;
 	
 func throw_goo():
 	var parent = get_parent();
