@@ -8,9 +8,8 @@ onready var monster_dice = get_node("DiceBG/MonsterDice");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	roll_dice();
+	$StartTimer.start()
 	
-
 func roll_dice():
 	$DiceSFX.play();
 	player_dice.roll();
@@ -19,4 +18,8 @@ func roll_dice():
 
 
 func _on_DiceTimer_timeout():
+	roll_dice();
+
+
+func _on_StartTimer_timeout():
 	roll_dice();
