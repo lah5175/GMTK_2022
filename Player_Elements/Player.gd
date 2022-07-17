@@ -6,8 +6,8 @@ signal game_over;
 
 
 # Basic parameters
-var current_hp: int = 10;
-var max_hp: int = 10;
+var current_hp: int = 20;
+var max_hp: int = 20;
 var move_speed: int = 125;
 var i_am_speed: int = 600;
 var keys: int = 0;

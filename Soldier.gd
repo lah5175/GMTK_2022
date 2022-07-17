@@ -56,7 +56,7 @@ func _physics_process(delta):
 func set_params():
 	max_hp = 5;
 	current_hp = 5;
-	move_speed = 40;
+	move_speed = 20;
 	damage = 1;
 	attack_dist = 30;
 	attack_rate = 0.5;
