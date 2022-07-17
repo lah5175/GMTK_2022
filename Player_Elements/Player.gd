@@ -9,11 +9,14 @@ signal game_over;
 var current_hp: int = 10;
 var max_hp: int = 10;
 var move_speed: int = 125;
+var i_am_speed: int = 600;
 
 # Attack variables
 var attack_cooldown_time = 1000;
 var next_attack_time = 0;
 var attack_damage = 30;
+var dash_damage: int = 5;
+var colliders: Dictionary = {};
 
 # Movement variables
 var velocity = Vector2();
@@ -23,7 +26,9 @@ var roll: int = 1;
 
 # Bools linked to timers
 var is_invulnerable: bool = false;
+var is_dashing: bool = false;
 var can_place_bomb: bool = true;
+var can_move: bool = true;
 
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -46,7 +51,35 @@ func _ready():
 #	pass
 
 
-func _physics_process (delta):		
+func _physics_process (delta):
+	if can_move:
+		move();
+		
+	if is_dashing:
+		move_and_slide(face_direction * i_am_speed, Vector2.ZERO);
+		
+		for i in get_slide_count():
+			var collision = get_slide_collision(i);
+			var collider = collision.collider;
+			if collider.get_class() == "Enemy" and !(collider in colliders):
+				print("I collided with ", collider)
+				colliders[collider] = true;
+				collider.take_damage(dash_damage);
+		
+	# Attacking inputs
+	if Input.is_action_just_pressed("attack"):
+		attack();
+	
+	# Cancel the spin dash move
+	if Input.is_action_just_released("attack") and !can_move:
+		$SpinHoldTimer.stop();
+		can_move = true;
+		
+	# Flash character if they are invulnerable
+	if is_invulnerable and !is_dashing:
+		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0;
+		
+func move():
 	velocity = Vector2();
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1;
@@ -64,14 +97,6 @@ func _physics_process (delta):
 	velocity = velocity.normalized();
 	move_and_slide(velocity * move_speed, Vector2.ZERO);
 	manage_animations();
-		
-	# Attacking inputs
-	if Input.is_action_just_pressed("attack"):
-		attack();
-		
-	# Flash character if they are invulnerable
-	if is_invulnerable:
-		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0;
 		
 func getCardinalRotation():
 	var cardinal_direction = {
@@ -141,6 +166,7 @@ func die():
 	$DeathSFX.play();
 	print("I'M DEAD")
 	emit_signal("game_over"); # TODO: Connect this signal
+
 	
 # Attack functions
 func swing_sword():
@@ -159,7 +185,7 @@ func shoot_arrow():
 	
 func place_bomb():
 	if can_place_bomb:
-		move_speed = 0;
+		can_move = false;
 		var bomb = bomb_factory.instance();
 		bomb.position = position;
 		
@@ -174,11 +200,22 @@ func place_bomb():
 			bomb.position.y += 15;
 			
 		get_node("..").add_child(bomb);
-		move_speed = 125;
 		
+		can_move = true;
 		can_place_bomb = false;
 		$BombTimer.start();
 	
+func charge_dash():
+	can_move = false;
+	colliders = {}; # Refresh collider list
+	$SpinHoldTimer.start();
+	
+func spin_dash():
+	var i_am_speed: int = 600;
+	var dist: int = 100;
+	is_dashing = true;
+	is_invulnerable = true;
+	$SpinDashTimer.start();
 	
 func attack():
 	match roll:
@@ -189,7 +226,7 @@ func attack():
 		3:
 			place_bomb();
 		4:
-			swing_sword();
+			charge_dash();
 		5:
 			swing_sword();
 		6:
@@ -212,7 +249,15 @@ func _on_UI_roll_results(player, monster):
 func _on_BombTimer_timeout():
 	can_place_bomb = true;
 
+func _on_SpinHoldTimer_timeout():
+	spin_dash();
+
+func _on_SpinDashTimer_timeout():
+	is_dashing = false;
+	is_invulnerable = false;
+	can_move = true;
+
+
 # Function overrides
 
 func get_class(): return "Player";
-
