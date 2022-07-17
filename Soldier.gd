@@ -31,7 +31,6 @@ func set_params():
 func spawn_projectile():
 	# Create a RatProjectile node and attach it to the main scene
 	var proj = rat_projectile.instance();
-	get_node("/root/MainScene").add_child(proj);
 	
 	# Set the initial position, direction, and rotation
 	# I don't really know, this is some black magic stuff
@@ -39,6 +38,7 @@ func spawn_projectile():
 	var dir = (target.global_position - proj.global_position).normalized();
 	proj.global_rotation = dir.angle() + PI / 2.0;
 	proj.direction = dir;
+	get_node("..").add_child(proj);
 	
 func attack():
 	match roll:
