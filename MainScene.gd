@@ -8,7 +8,6 @@ onready var boss = $MainScene/Boss;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
 	randomize();
 	boss.connect("bullet_start", self, "_on_Boss_bullet_start");
 
