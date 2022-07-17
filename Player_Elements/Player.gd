@@ -30,11 +30,13 @@ var is_invulnerable: bool = false;
 var is_dashing: bool = false;
 var can_place_bomb: bool = true;
 var can_move: bool = true;
+var can_shield: bool = true;
 
 # Preload weapons so we can instance them later
 var arrow_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack2.tscn");
 var bomb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack3.tscn");
 var orb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack5.tscn");
+var shield_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack6.tscn");
 
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -239,7 +241,12 @@ func shoot_orbs():
 			orb.direction = face_direction;
 		
 		parent.add_child(orb);
-	
+		
+func summon_shield():
+	var shield = shield_factory.instance();
+	add_child(shield);
+	can_shield = false;
+	$ShieldCooldownTimer.start();
 	
 func attack():
 	match roll:
@@ -254,7 +261,7 @@ func attack():
 		5:
 			shoot_orbs();
 		6:
-			swing_sword();
+			summon_shield();
 		_:
 			swing_sword();
 			print("If you get this message, there's a bug in Player.gd");
@@ -280,8 +287,12 @@ func _on_SpinDashTimer_timeout():
 	is_dashing = false;
 	is_invulnerable = false;
 	can_move = true;
+	
+func _on_ShieldCooldownTimer_timeout():
+	can_shield = true;
 
 
 # Function overrides
 
 func get_class(): return "Player";
+
