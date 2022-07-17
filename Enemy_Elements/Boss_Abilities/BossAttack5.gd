@@ -14,7 +14,7 @@ func _ready():
 
 
 func _on_WarningTimer_timeout():
-	$CollisionShape2D.set_deferred("disabled", false);
+	$CollisionPolygon2D.set_deferred("disabled", false);
 	$AnimatedSprite.animation = "Active";
 	$DurationTimer.start();
 
@@ -23,7 +23,7 @@ func _on_DurationTimer_timeout():
 	queue_free();
 
 
-func _on_BossAttack1_body_entered(body):
+func _on_BossAttack5_body_entered(body):
 	var collider_type = body.get_class();
 	if collider_type == "Player":
 		body.take_damage(damage);

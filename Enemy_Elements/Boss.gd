@@ -7,11 +7,12 @@ var attack_rates = {
 	"2": 1.0,
 	"3": 0.5,
 	"4": 1.0, # Does not matter
-	"5": 2.0,
+	"5": 3.0,
 	"6": 1.0 # Does not matter
 }
 
 var melee_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack1.tscn");
+var cone_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack5.tscn");
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -50,7 +51,17 @@ func toxic_spew():
 	pass;
 	
 func throw_goo():
-	pass;
+	var parent = get_parent();
+	var cone1 = cone_factory.instance();
+	var cone2 = cone_factory.instance();
+	parent.add_child(cone1);
+	parent.add_child(cone2);
+	
+	cone1.position = Vector2(1235, -57);
+	cone2.position = Vector2(1337, -57);
+	cone1.rotation = deg2rad(137.8);
+	cone2.rotation = deg2rad(225.5);
+	
 	
 func goo_explosion():
 	pass;

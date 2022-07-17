@@ -40,7 +40,7 @@ one_shot = true
 autostart = true
 
 [node name="DurationTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_BossAttack1_body_entered"]
