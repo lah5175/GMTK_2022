@@ -1,6 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -12,14 +20,64 @@ margin_right = 321.0
 margin_bottom = 179.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="RichTextLabel" type="Label" parent="ColorRect"]
+[node name="Label" type="Label" parent="."]
+margin_left = 246.0
+margin_top = 27.0
+margin_right = 319.0
+margin_bottom = 167.0
+custom_colors/font_color = Color( 0.156863, 0.137255, 0.137255, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "This project was a first attempt at any game design so hopefully it's not too bad
+
+<3"
+autowrap = true
+
+[node name="RichTextLabel" type="Label" parent="."]
 anchor_bottom = 0.024
-margin_left = 8.0
+margin_left = 5.0
+margin_top = 24.0
+margin_right = 225.0
+margin_bottom = 93.68
+custom_fonts/font = SubResource( 3 )
+text = "Development:
+Luz (@Luz#1012)
+Naya (@SilentProtag#8135)
+
+Enemy and Boss Design:
+Jr (@Jokerabbit#9133)
+"
+autowrap = true
+
+[node name="RichTextLabel2" type="Label" parent="."]
+anchor_bottom = 0.024
+margin_left = 2.0
 margin_top = 3.0
-margin_right = 312.0
-margin_bottom = 171.704
+margin_right = 318.0
+margin_bottom = 40.68
 custom_fonts/font = SubResource( 1 )
-text = "thenks for playin i guess"
-align = 1
-valign = 1
+text = "Thanks for playing!"
+autowrap = true
+
+[node name="RichTextLabel3" type="Label" parent="."]
+anchor_bottom = 0.024
+margin_left = 3.0
+margin_top = 105.0
+margin_right = 223.0
+margin_bottom = 141.68
+custom_fonts/font = SubResource( 3 )
+text = "Sound Assets: freesound.org
+Tilemap Assets: kenney.nl
+Font Assets: Google Fonts
+"
+autowrap = true
+
+[node name="RichTextLabel4" type="Label" parent="."]
+anchor_bottom = 0.024
+margin_left = 3.0
+margin_top = 161.0
+margin_right = 223.0
+margin_bottom = 197.68
+custom_fonts/font = SubResource( 3 )
+text = "Made for HMTK Game Jam 2022
+"
 autowrap = true
