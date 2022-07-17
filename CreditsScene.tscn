@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Font/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="CreditsScene" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 321.0
+margin_bottom = 179.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="RichTextLabel" type="Label" parent="ColorRect"]
+anchor_bottom = 0.024
+margin_left = 8.0
+margin_top = 3.0
+margin_right = 312.0
+margin_bottom = 171.704
+custom_fonts/font = SubResource( 1 )
+text = "thenks for playin i guess"
+align = 1
+valign = 1
+autowrap = true
