@@ -35,8 +35,8 @@ func _physics_process(delta):
 
 
 func set_params():
-	max_hp = 20;
-	current_hp =  20;
+	max_hp = 200;
+	current_hp =  200;
 	damage = 1;
 	
 # Attack functions
@@ -84,7 +84,6 @@ func throw_goo():
 	
 	
 func goo_explosion():
-	print("boss is exploding");
 	$ExplosionTimer.start();
 	$AlertSFX.play();
 	is_exploding = true;
@@ -113,7 +112,6 @@ func start_flicker_timer():
 	$FlickerTimer.start();
 
 func stop_explosion():
-	print("you stopped the explosion")
 	is_exploding = false;
 	$ExplosionTimer.stop();
 	$AlertSFX.stop();
@@ -134,11 +132,9 @@ func _on_FlickerTimer_timeout():
 
 
 func _on_ExplosionTimer_timeout():
-	print("explosion happens")
 	$AlertSFX.stop();
 	$ExplosionSFX.play();
 	var player = get_node("../Player");
 	player.take_damage(5);
 	switch.disable_switch();
-	# Sound
 	# Screen flash
