@@ -4,7 +4,6 @@ onready var sprite = $AnimatedSprite;
 onready var credits = get_node("/root/SceneManager/TransitionScreen");
 
 func _ready():
-	$CollisionShape2D.disabled = true;
 	self.connect("body_entered", self, "_on_CreditsDoor_body_entered");
 
 func _on_CreditsDoor_body_entered(body):
@@ -13,3 +12,11 @@ func _on_CreditsDoor_body_entered(body):
 		$EnterDoor.play();
 		#Trigger Credits
 		credits.transition();
+
+func OpenDoor():
+	sprite.play("open")
+
+
+func _on_Boss_BossKilled():
+	print("killed recieved")
+	OpenDoor(); # Replace with function body.

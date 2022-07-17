@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/276358__n-audioman__death.wav-e025bd33c1bb25c46e98d9e9fc7a3f11.sample"
+
+[deps]
+
+source_file="res://Sounds/music/276358__n-audioman__death.wav"
+dest_files=[ "res://.import/276358__n-audioman__death.wav-e025bd33c1bb25c46e98d9e9fc7a3f11.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

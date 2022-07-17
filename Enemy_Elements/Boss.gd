@@ -1,6 +1,7 @@
 extends Enemy
 
 signal bullet_start;
+signal BossKilled;
 
 var roll: int = 1;
 
@@ -142,3 +143,13 @@ func _on_ExplosionTimer_timeout():
 	player.take_damage(5);
 	switch.disable_switch();
 	# Screen flash
+
+func playDeathSound():
+	$AnimatedSprite.visible = false;
+	$DeathSound.play();
+	emit_signal("BossKilled")
+	
+
+func _on_DeathSound_finished():
+	die();
+

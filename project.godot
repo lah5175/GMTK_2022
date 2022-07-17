@@ -42,6 +42,10 @@ config/name="GMTK_2022"
 run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+OverworldMusic="*res://World_Elements/OverworldMusic.tscn"
+
 [display]
 
 window/size/width=320
