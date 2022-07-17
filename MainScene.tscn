@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player_Elements/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://CameraFollow.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://World_Elements/CreditsDoor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World_Elements/TransitionScreen.tscn" type="PackedScene" id=12]
 [ext_resource path="res://World_Elements/BossSwitch.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Sounds/music/583613__evretro__8-bit-brisk-music-loop.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/music/466998__bone666138__8-bit-video-game-fight-music.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/music/520611__lukeball77__andy-3-90-bpm-gtr-01-notas-largas-8th-fret.wav" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.75, 550 )
@@ -106,10 +109,20 @@ script = ExtResource( 2 )
 position = Vector2( 168, -173 )
 
 [node name="Player" parent="MainScene" instance=ExtResource( 1 )]
-position = Vector2( 1287, 6 )
+position = Vector2( 167, 102 )
 
 [node name="Boss" parent="MainScene" instance=ExtResource( 10 )]
 position = Vector2( 1293, -191 )
+
+[node name="FieldBGM" type="AudioStreamPlayer" parent="MainScene"]
+stream = ExtResource( 14 )
+autoplay = true
+
+[node name="BossBGM" type="AudioStreamPlayer" parent="MainScene"]
+stream = ExtResource( 15 )
+
+[node name="CreditsBGM" type="AudioStreamPlayer" parent="MainScene"]
+stream = ExtResource( 16 )
 
 [node name="TransitionScreen" parent="." instance=ExtResource( 12 )]
 
