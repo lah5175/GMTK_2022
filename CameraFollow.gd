@@ -1,7 +1,7 @@
 extends Camera2D
 
 
-onready var target = get_node("/root/MainScene/Player");
+onready var target = get_node("/root/SceneManager/MainScene/Player");
 
 
 # Called when the node enters the scene tree for the first time.

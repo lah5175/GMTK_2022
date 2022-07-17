@@ -17,7 +17,7 @@ var circle_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack4.t
 var laser_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack4.tscn");
 
 onready var timer = $AttackTimer;
-onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
+onready var ui = get_node("/root/SceneManager/MainScene/CanvasLayer/UI");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
