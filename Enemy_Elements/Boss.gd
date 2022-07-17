@@ -13,6 +13,7 @@ var attack_rates = {
 
 var melee_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack1.tscn");
 var cone_factory = preload("res://Enemy_Elements/Boss_Abilities/BossAttack5.tscn");
+var circle_factory = preload("res://Enemy_Elements/Ability_Types/PurpleAttack4.tscn");
 
 onready var timer = $AttackTimer;
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
@@ -42,7 +43,11 @@ func attack_with_melee():
 	melee.position.y = -134;
 	
 func bombs_away():
-	pass;
+	var parent = get_parent();
+	var circle = circle_factory.instance();
+	parent.add_child(circle);
+	
+	circle.position = target.position;
 	
 func crossfire():
 	pass
