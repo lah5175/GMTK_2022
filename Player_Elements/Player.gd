@@ -31,16 +31,17 @@ var is_dashing: bool = false;
 var can_place_bomb: bool = true;
 var can_move: bool = true;
 
+# Preload weapons so we can instance them later
+var arrow_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack2.tscn");
+var bomb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack3.tscn");
+var orb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack5.tscn");
+
 onready var healthNode = get_tree().get_root().get_node("MainScene/CanvasLayer/UI/Health")
 onready var ui = get_node("/root/MainScene/CanvasLayer/UI");
 onready var door : AnimatedSprite = get_node("/root/MainScene/BossDoor/AnimatedSprite");
 
 onready var sprite = $AnimatedSprite;
 onready var attackArea = $AttackArea;
-
-# Preload weapons so we can instance them later
-var arrow_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack2.tscn");
-var bomb_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack3.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -224,6 +225,23 @@ func spin_dash():
 	is_invulnerable = true;
 	$SpinDashTimer.start();
 	
+func shoot_orbs():
+	var orbs: Array = [];
+	var parent = get_parent();
+	for i in range(3):
+		var orb = orb_factory.instance();
+		orb.position = position;
+		
+		if i == 1:
+			orb.direction = face_direction.rotated(deg2rad(-45));
+		elif i == 2:
+			orb.direction = face_direction.rotated(deg2rad(45));
+		else:
+			orb.direction = face_direction;
+		
+		parent.add_child(orb);
+	
+	
 func attack():
 	match roll:
 		1:
@@ -235,7 +253,7 @@ func attack():
 		4:
 			charge_dash();
 		5:
-			swing_sword();
+			shoot_orbs();
 		6:
 			swing_sword();
 		_:
