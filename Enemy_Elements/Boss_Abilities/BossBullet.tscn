@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Enemy_Elements/Boss_Abilities/BossBullet.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Weapons/projectile.png" type="Texture" id=2]
+[ext_resource path="res://Enemy_Elements/Boss_Abilities/BossBulletArea2D.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 4.12311
 
 [node name="BossBullet" type="RigidBody2D"]
 collision_layer = 0
@@ -24,5 +28,12 @@ shape = SubResource( 1 )
 position = Vector2( 0, 2.38419e-07 )
 scale = Vector2( 0.5, 0.5 )
 
+[node name="BossBulletArea2D" type="Area2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossBulletArea2D"]
+shape = SubResource( 2 )
+
 [connection signal="body_entered" from="." to="." method="_on_BossBullet_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_entered" from="BossBulletArea2D" to="BossBulletArea2D" method="_on_BossBulletArea2D_area_entered"]
