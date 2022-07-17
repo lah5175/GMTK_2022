@@ -84,8 +84,7 @@ func _physics_process (delta):
 		
 	if keys >=3:
 		door.animation = "open";
-		
-		
+
 func move():
 	velocity = Vector2();
 	if Input.is_action_pressed("move_up"):
