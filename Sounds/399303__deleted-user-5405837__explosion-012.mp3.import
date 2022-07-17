@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/399303__deleted-user-5405837__explosion-012.mp3-f6326779083121cf6b7956aa6e0285ea.mp3str"
+
+[deps]
+
+source_file="res://Sounds/399303__deleted-user-5405837__explosion-012.mp3"
+dest_files=[ "res://.import/399303__deleted-user-5405837__explosion-012.mp3-f6326779083121cf6b7956aa6e0285ea.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
