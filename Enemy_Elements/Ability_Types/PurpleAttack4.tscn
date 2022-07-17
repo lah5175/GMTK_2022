@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Enemy_Abilities/circular_aoe.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemy_Abilities/circular_aoe_indicator.png" type="Texture" id=2]
+[ext_resource path="res://Enemy_Elements/Ability_Types/PurpleAttack4.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Warning",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Active",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.0
+
+[node name="PurpleAttack4" type="Area2D"]
+modulate = Color( 1, 1, 1, 0.47451 )
+scale = Vector2( 9, 9 )
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Warning"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+disabled = true
+
+[node name="WarningTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="DurationTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_PurpleAttack4_body_entered"]
+[connection signal="timeout" from="WarningTimer" to="." method="_on_WarningTimer_timeout"]
+[connection signal="timeout" from="DurationTimer" to="." method="_on_DurationTimer_timeout"]
