@@ -43,3 +43,11 @@ func _on_WarningTimer_timeout():
 	$CollisionShape2D.set_deferred("disabled", false);
 	$AnimatedSprite.animation = "Active";
 	$DurationTimer.start();
+
+
+func _on_BossAttack4_area_entered(area):
+	var collider_type = area.get_class();
+	print(collider_type);
+	if collider_type == "ParticleShield":
+		area.reflect(damage);
+

@@ -27,3 +27,10 @@ func _on_BossAttack1_body_entered(body):
 	var collider_type = body.get_class();
 	if collider_type == "Player":
 		body.take_damage(damage);
+
+
+func _on_BossAttack1_area_entered(area):
+	var collider_type = area.get_class();
+	print(collider_type);
+	if collider_type == "ParticleShield":
+		area.reflect(damage);

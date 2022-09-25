@@ -47,6 +47,7 @@ wait_time = 0.75
 one_shot = true
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_BossAttack4_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_BossAttack4_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_BossAttack4_body_exited"]
 [connection signal="timeout" from="DurationTimer" to="." method="_on_DurationTimer_timeout"]
