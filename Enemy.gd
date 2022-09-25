@@ -37,10 +37,9 @@ func take_damage(dmg):
 	if current_hp <= 0:
 		playDeathSound();
 		#die();
-		
-	
+
 func die():
-	queue_free(); 
+	queue_free();
 	
 
 # Function Overrides

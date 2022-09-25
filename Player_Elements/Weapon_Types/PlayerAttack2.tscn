@@ -7,7 +7,6 @@
 extents = Vector2( 3, 10 )
 
 [node name="PlayerAttack2" type="Area2D"]
-scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
