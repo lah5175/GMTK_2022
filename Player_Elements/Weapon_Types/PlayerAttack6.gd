@@ -8,6 +8,7 @@ var direction = Vector2();
 var projectile_factory = preload("res://ShieldProjectile.tscn");
 
 onready var parent;
+onready var scene;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +16,7 @@ func _ready():
 	$DurationTimer.wait_time = duration;
 	$DurationTimer.start();
 	parent = get_parent();
+	scene = get_node("../..");
 
 
 func _physics_process(delta):
@@ -23,7 +25,7 @@ func _physics_process(delta):
 	
 func reflect(damage):
 	var projectile = projectile_factory.instance();
-	parent.add_child(projectile);
+	scene.add_child(projectile);
 	
 	projectile.direction = parent.face_direction;
 	projectile.global_position = global_position;
@@ -32,6 +34,7 @@ func reflect(damage):
 
 # Signal functions
 func _on_DurationTimer_timeout():
+	get_parent().is_shielding = false;
 	queue_free();
 
 

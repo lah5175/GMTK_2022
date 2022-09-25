@@ -181,3 +181,4 @@ func play_animation (sprite_name):
 
 func _on_DeathSound_finished() :
 	die();
+	

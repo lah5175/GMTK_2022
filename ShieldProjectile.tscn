@@ -7,7 +7,6 @@
 extents = Vector2( 4.75, 8 )
 
 [node name="ShieldProjectile" type="Area2D"]
-scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

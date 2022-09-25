@@ -31,6 +31,7 @@ var is_dashing: bool = false;
 var can_place_bomb: bool = true;
 var can_move: bool = true;
 var can_shield: bool = true;
+var is_shielding: bool = false;
 
 # Preload weapons so we can instance them later
 var arrow_factory = preload("res://Player_Elements/Weapon_Types/PlayerAttack2.tscn");
@@ -158,7 +159,7 @@ func play_animation (sprite_name):
 		sprite.play(sprite_name);
 		
 func take_damage(damage):
-	if !is_invulnerable:
+	if !is_invulnerable and !is_shielding:
 		is_invulnerable = true;
 		current_hp -= damage;
 		healthNode.update_hp(current_hp, max_hp);
@@ -186,7 +187,8 @@ func swing_sword():
 	
 func shoot_arrow():
 	var arrow = arrow_factory.instance();
-	add_child(arrow);
+	var parent = get_parent();
+	parent.add_child(arrow);
 	arrow.global_position = global_position;
 	arrow.direction = face_direction;
 	arrow.rotation = getCardinalRotation();
@@ -208,7 +210,8 @@ func place_bomb():
 		elif face_direction.y == 1:
 			bomb.position.y += 15;
 			
-		get_node("..").add_child(bomb);
+		var parent = get_parent();
+		parent.add_child(bomb);
 		
 		can_move = true;
 		can_place_bomb = false;
@@ -246,6 +249,7 @@ func summon_shield():
 	var shield = shield_factory.instance();
 	add_child(shield);
 	can_shield = false;
+	is_shielding = true;
 	$ShieldCooldownTimer.start();
 	
 func attack():
