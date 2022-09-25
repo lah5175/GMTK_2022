@@ -45,6 +45,7 @@ onready var door : AnimatedSprite = get_node("/root/SceneManager/MainScene/BossD
 
 onready var sprite = $AnimatedSprite;
 onready var attackArea = $AttackArea;
+onready var transition = get_node("/root/SceneManager/TransitionScreen");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -174,8 +175,7 @@ func take_damage(damage):
 func die():
 	hide();
 	$DeathSFX.play();
-	print("I'M DEAD")
-	emit_signal("game_over"); # TODO: Connect this signal
+	transition.transition("game_over");
 
 	
 # Attack functions

@@ -1,6 +1,7 @@
 extends Node2D
 
-const Credits = preload("res://CreditsScene.tscn")
+const CREDITS = preload("res://CreditsScene.tscn");
+const GAME_OVER = preload("res://GameOver.tscn");
 
 var bullet_factory = preload("res://Enemy_Elements/Boss_Abilities/BossBullet.tscn");
 
@@ -42,5 +43,16 @@ func _on_BulletTimer_timeout():
 func _on_BulletEndTimer_timeout():
 	$BulletTimer.stop();
 
-func _on_TransitionScreen_transitioned():
-	$MainScene.add_child(Credits.instance());
+func _on_TransitionScreen_transitioned(type):
+	$MainScene/FieldBGM.stop();
+	$MainScene/BossBGM.stop();
+	$MainScene/CreditsBGM.play();
+	$MainScene/CanvasLayer/UI.queue_free();
+	
+	if type == "credits":
+		$MainScene.add_child(CREDITS.instance());
+	elif type == "game_over":
+		$MainScene.add_child(GAME_OVER.instance());
+	else:
+		print("Invalid scene type, treating as a Game Over");
+		$MainScene.add_child(GAME_OVER.instance());
